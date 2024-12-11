@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         PROJECT_DIR = '/var/jenkins_home/workspace/music-classification'  // Use this variable for reusability
-        FRONTEND_IMAGE = 'music_frontend_image'
-        SVM_IMAGE = 'svm_service_image'
-        VGG19_IMAGE = 'vgg19_service_image'
+        FRONTEND_IMAGE = 'front_image'
+        SVM_IMAGE = 'svm_image'
+        VGG19_IMAGE = 'vgg_image'
     }
 
     stages {
@@ -21,9 +21,9 @@ pipeline {
                 script {
                     // Navigate to the project directory and build the Docker images
                     dir("${env.PROJECT_DIR}") {
-                        sh "docker build -t ${env.FRONTEND_IMAGE} ./front-end"
-                        sh "docker build -t ${env.SVM_IMAGE} ./svm-service"
-                        sh "docker build -t ${env.VGG19_IMAGE} ./vgg19-service"
+                        sh "docker build -t ${env.FRONTEND_IMAGE} ./Front"
+                        sh "docker build -t ${env.SVM_IMAGE} ./SVM"
+                        sh "docker build -t ${env.VGG19_IMAGE} ./VGG19"
                     }
                 }
             }
