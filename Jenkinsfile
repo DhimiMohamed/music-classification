@@ -58,17 +58,17 @@ pipeline {
         //     }
         // }
 
-        stage('Cleanup') {
-            steps {
-                script {
-                    // Stop and remove containers after the job is complete
-                    sh "docker stop frontend_container1 svm_service_container1 vgg19_service_container1"
-                    sh "docker rm frontend_container1 svm_service_container1 vgg19_service_container1"
+        // stage('Cleanup') {
+        //     steps {
+        //         script {
+        //             // Stop and remove containers after the job is complete
+        //             sh "docker stop frontend_container1 svm_service_container1 vgg19_service_container1"
+        //             sh "docker rm frontend_container1 svm_service_container1 vgg19_service_container1"
 
-                    // Optionally, remove the Docker images
-                    // sh "docker rmi ${env.FRONTEND_IMAGE} ${env.SVM_IMAGE} ${env.VGG19_IMAGE}"
-                }
-            }
-        }
+        //             // Optionally, remove the Docker images
+        //             // sh "docker rmi ${env.FRONTEND_IMAGE} ${env.SVM_IMAGE} ${env.VGG19_IMAGE}"
+        //         }
+        //     }
+        // }
     }
 }
