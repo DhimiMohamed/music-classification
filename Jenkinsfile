@@ -32,7 +32,10 @@ pipeline {
         stage('Run Containers') {
             steps {
                 script {
-                    // Start the containers directly using docker run commands
+                    // Create the Docker network if it doesn't exist
+                    sh "docker network inspect app-network || docker network create app-network"
+
+                    // Start the containers using the created network
                     sh "docker run -d -p 80:80 --name frontend_container --network app-network ${env.FRONTEND_IMAGE}"
                     sh "docker run -d -p 5000:5000 --name svm_service_container --network app-network ${env.SVM_IMAGE}"
                     sh "docker run -d -p 3000:5000 --name vgg19_service_container --network app-network ${env.VGG19_IMAGE}"
