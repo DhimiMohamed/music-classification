@@ -35,7 +35,12 @@ pipeline {
                     // Create the Docker network if it doesn't exist
                     sh "docker network inspect app-network || docker network create app-network"
 
-                    // Start the containers using the created network
+                    // Remove any existing containers with the same names
+                    sh "docker ps -a --filter 'name=frontend_container' --format '{{.ID}}' | xargs -r docker rm -f"
+                    sh "docker ps -a --filter 'name=svm_service_container' --format '{{.ID}}' | xargs -r docker rm -f"
+                    sh "docker ps -a --filter 'name=vgg19_service_container' --format '{{.ID}}' | xargs -r docker rm -f"
+
+                    // Run the containers
                     sh "docker run -d -p 80:80 --name frontend_container --network app-network ${env.FRONTEND_IMAGE}"
                     sh "docker run -d -p 5000:5000 --name svm_service_container --network app-network ${env.SVM_IMAGE}"
                     sh "docker run -d -p 3000:5000 --name vgg19_service_container --network app-network ${env.VGG19_IMAGE}"
