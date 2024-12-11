@@ -66,7 +66,7 @@ pipeline {
                     sh "docker rm frontend_container1 svm_service_container1 vgg19_service_container1"
 
                     // Optionally, remove the Docker images
-                    sh "docker rmi ${env.FRONTEND_IMAGE} ${env.SVM_IMAGE} ${env.VGG19_IMAGE}"
+                    // sh "docker rmi ${env.FRONTEND_IMAGE} ${env.SVM_IMAGE} ${env.VGG19_IMAGE}"
                 }
             }
         }
